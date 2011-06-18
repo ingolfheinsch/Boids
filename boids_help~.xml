@@ -1,9 +1,9 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta25.1.dtd" >
    <PATCH nodename="C:\Documents and Settings\admin\My Documents\Dropbox\CODE\VVVV\LIBRARY\PLUGINS\0.01AnimationBoids\boids_help.v4p" filename="E:\WORK\Sketches\Addons\0.01AnimationBoids\boids_help.v4p" systemname="boids_help">
-   <BOUNDS height="13770" left="420" top="2025" type="Window" width="9375">
+   <BOUNDS height="11250" left="0" top="1215" type="Window" width="9210">
    </BOUNDS>
    <NODE componentmode="Hidden" filename="0.01AnimationBoids.csproj" id="1" nodename="Boids (Animation 0.01)" systemname="Boids (Animation 0.01)">
-   <BOUNDS height="100" left="1440" top="840" type="Node" width="100">
+   <BOUNDS height="270" left="1200" top="3945" type="Node" width="1020">
    </BOUNDS>
    <PIN pinname="Input" slicecount="1" values="1.01">
    </PIN>
@@ -13,55 +13,25 @@
    </PIN>
    <PIN pinname="Coh">
    </PIN>
-   <PIN pinname="Align" slicecount="1" visible="1" values="10">
+   <PIN pinname="Align" slicecount="1" visible="1" values="100">
    </PIN>
-   <PIN pinname="Desire" slicecount="1" visible="1" values="91.5">
+   <PIN pinname="Desire" slicecount="1" visible="1" values="60">
    </PIN>
-   <PIN pinname="Cohesion" slicecount="1" visible="1" values="100">
+   <PIN pinname="Cohesion" slicecount="1" visible="1" values="200">
    </PIN>
-   <PIN pinname="XRoot" slicecount="1" values="4.48">
+   <PIN pinname="XRoot" slicecount="1" values="100">
    </PIN>
-   <PIN pinname="Count" slicecount="1" values="150">
+   <PIN pinname="Count" slicecount="1" values="145">
    </PIN>
-   </NODE>
-   <NODE componentmode="Hidden" id="4" nodename="Map (Value)" systemname="Map (Value)">
-   <BOUNDS height="100" left="1875" top="2370" type="Node" width="100">
-   </BOUNDS>
-   <PIN pinname="Input" visible="1">
-   </PIN>
-   <PIN pinname="Source Maximum" slicecount="1" values="400">
-   </PIN>
-   <PIN pinname="Destination Minimum" slicecount="1" values="-1">
-   </PIN>
-   <PIN pinname="Output" visible="1">
-   </PIN>
-   <PIN pinname="Mapping" slicecount="1" values="Float">
+   <PIN pinname="YRoot" slicecount="1" values="100">
    </PIN>
    </NODE>
-   <LINK dstnodeid="4" dstpinname="Input" srcnodeid="1" srcpinname="Output_X">
-   </LINK>
-   <NODE componentmode="Hidden" id="5" nodename="Map (Value)" systemname="Map (Value)">
-   <BOUNDS height="100" left="885" top="2175" type="Node" width="100">
-   </BOUNDS>
-   <PIN pinname="Input" visible="1">
-   </PIN>
-   <PIN pinname="Source Maximum" slicecount="1" values="400">
-   </PIN>
-   <PIN pinname="Destination Minimum" slicecount="1" values="-1">
-   </PIN>
-   <PIN pinname="Output" visible="1">
-   </PIN>
-   <PIN pinname="Mapping" slicecount="1" values="Float">
-   </PIN>
-   </NODE>
-   <LINK dstnodeid="5" dstpinname="Input" srcnodeid="1" srcpinname="Output_Y">
-   </LINK>
    <NODE componentmode="InAWindow" id="6" nodename="Renderer (EX9)" systemname="Renderer (EX9)">
-   <BOUNDS height="100" left="1005" top="7905" type="Node" width="100">
+   <BOUNDS height="100" left="75" top="8820" type="Node" width="100">
    </BOUNDS>
-   <BOUNDS height="1800" left="1005" top="7905" type="Box" width="2400">
+   <BOUNDS height="1800" left="75" top="8820" type="Box" width="2400">
    </BOUNDS>
-   <BOUNDS height="10200" left="10395" top="1290" type="Window" width="12360">
+   <BOUNDS height="5190" left="9135" top="1230" type="Window" width="7410">
    </BOUNDS>
    <PIN pinname="Layers" visible="1">
    </PIN>
@@ -79,7 +49,7 @@
    </PIN>
    </NODE>
    <NODE componentmode="Hidden" id="8" nodename="Transform (Transform 2d)" systemname="Transform (Transform 2d)">
-   <BOUNDS height="270" left="705" top="3735" type="Node" width="3885">
+   <BOUNDS height="270" left="255" top="6945" type="Node" width="6675">
    </BOUNDS>
    <PIN pinname="Transform Out" visible="1">
    </PIN>
@@ -95,17 +65,19 @@
    </PIN>
    </NODE>
    <NODE componentmode="InABox" id="9" nodename="IOBox (Value Advanced)" systemname="IOBox (Value Advanced)">
-   <BOUNDS height="100" left="1995" top="1785" type="Node" width="100">
+   <BOUNDS height="100" left="2490" top="5805" type="Node" width="100">
    </BOUNDS>
-   <BOUNDS height="240" left="1995" top="1785" type="Box" width="960">
+   <BOUNDS height="240" left="2490" top="5805" type="Box" width="675">
    </BOUNDS>
    <PIN pinname="Y Output Value" visible="1">
    </PIN>
-   <PIN pinname="Y Input Value" slicecount="1" values="0.02">
+   <PIN pinname="Y Input Value" slicecount="1" values="0.05">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|ScaleX - Input|">
    </PIN>
    </NODE>
    <NODE componentmode="Hidden" filename="" id="11" nodename="Segment (EX9.Geometry 2d)" systemname="Segment (DX9)">
-   <BOUNDS height="100" left="585" top="4845" type="Node" width="100">
+   <BOUNDS height="100" left="75" top="7770" type="Node" width="100">
    </BOUNDS>
    <PIN pinname="Layer" visible="1">
    </PIN>
@@ -119,7 +91,7 @@
    <LINK dstnodeid="11" dstpinname="Transform" srcnodeid="8" srcpinname="Transform Out">
    </LINK>
    <NODE componentmode="Hidden" id="12" nodename="Heading (Animation)" systemname="Heading (Animation)">
-   <BOUNDS height="100" left="2760" top="3300" type="Node" width="100">
+   <BOUNDS height="100" left="4320" top="6195" type="Node" width="100">
    </BOUNDS>
    <PIN pinname="Y" visible="1">
    </PIN>
@@ -128,30 +100,10 @@
    <PIN pinname="Angle" visible="1">
    </PIN>
    </NODE>
-   <LINK dstnodeid="12" dstpinname="Y" srcnodeid="4" srcpinname="Output">
-   </LINK>
-   <LINK dstnodeid="12" dstpinname="X" srcnodeid="5" srcpinname="Output">
-   </LINK>
-   <LINK dstnodeid="8" dstpinname="TranslateX" srcnodeid="5" srcpinname="Output">
-   </LINK>
-   <LINK dstnodeid="8" dstpinname="TranslateY" srcnodeid="4" srcpinname="Output">
-   </LINK>
    <LINK dstnodeid="8" dstpinname="Rotate" srcnodeid="12" srcpinname="Angle">
    </LINK>
-   <NODE componentmode="Hidden" id="15" nodename="Group (EX9)" systemname="Group (EX9)">
-   <BOUNDS height="100" left="585" top="5640" type="Node" width="100">
-   </BOUNDS>
-   <PIN pinname="Layer 1" visible="1">
-   </PIN>
-   <PIN pinname="Layer" visible="1">
-   </PIN>
-   <PIN pinname="Layer 2" slicecount="1" visible="1" values="||">
-   </PIN>
-   </NODE>
-   <LINK dstnodeid="6" dstpinname="Layers" srcnodeid="15" srcpinname="Layer">
-   </LINK>
    <NODE componentmode="Hidden" id="18" nodename="Divide (Value)" systemname="Divide (Value)">
-   <BOUNDS height="100" left="2790" top="2835" type="Node" width="100">
+   <BOUNDS height="100" left="4035" top="6630" type="Node" width="100">
    </BOUNDS>
    <PIN pinname="Input" visible="1">
    </PIN>
@@ -167,7 +119,7 @@
    <LINK dstnodeid="8" dstpinname="ScaleX" srcnodeid="9" srcpinname="Y Output Value">
    </LINK>
    <NODE componentmode="Hidden" id="19" nodename="AspectRatio (Transform)" systemname="AspectRatio (Transform)">
-   <BOUNDS height="100" left="2235" top="8460" type="Node" width="100">
+   <BOUNDS height="100" left="930" top="9525" type="Node" width="100">
    </BOUNDS>
    <PIN pinname="Aspect Width" visible="1">
    </PIN>
@@ -180,14 +132,42 @@
    </LINK>
    <LINK dstnodeid="19" dstpinname="Aspect Height" srcnodeid="6" srcpinname="Actual Backbuffer Height">
    </LINK>
-   <LINK dstnodeid="6" dstpinname="Aspect Ratio Transform" srcnodeid="19" srcpinname="Transform Out">
-   <LINKPOINT x="3260" y="8745">
+   <LINK srcnodeid="1" srcpinname="Output_X" dstnodeid="8" dstpinname="TranslateX">
+   </LINK>
+   <LINK srcnodeid="1" srcpinname="Output_Y" dstnodeid="8" dstpinname="TranslateY">
+   </LINK>
+   <LINK srcnodeid="1" srcpinname="Output_Y" dstnodeid="12" dstpinname="Y" linkstyle="Bezier">
+   <LINKPOINT x="2220" y="5190">
    </LINKPOINT>
-   <LINKPOINT x="2950" y="7965">
+   <LINKPOINT x="4965" y="5190">
    </LINKPOINT>
    </LINK>
-   <LINK dstnodeid="15" dstpinname="Layer 1" srcnodeid="11" srcpinname="Layer">
-   <LINKPOINT x="0" y="5835">
+   <LINK srcnodeid="1" srcpinname="Output_X" dstnodeid="12" dstpinname="X" linkstyle="Bezier">
+   <LINKPOINT x="1260" y="5190">
+   </LINKPOINT>
+   <LINKPOINT x="4320" y="5190">
    </LINKPOINT>
    </LINK>
+   <LINK srcnodeid="11" srcpinname="Layer" dstnodeid="6" dstpinname="Layers">
+   </LINK>
+   <LINK srcnodeid="19" srcpinname="Transform Out" dstnodeid="6" dstpinname="Aspect Ratio Transform">
+   <LINKPOINT x="945" y="10380">
+   </LINKPOINT>
+   <LINKPOINT x="2100" y="10380">
+   </LINKPOINT>
+   <LINKPOINT x="2100" y="8580">
+   </LINKPOINT>
+   </LINK>
+   <NODE nodename="IOBox (String)" componentmode="InABox" id="23" systemname="IOBox (String)">
+   <BOUNDS type="Node" left="15" top="30" width="8820" height="3420">
+   </BOUNDS>
+   <BOUNDS type="Box" left="15" top="30" width="8820" height="3420">
+   </BOUNDS>
+   <PIN pinname="Input String" visible="0" slicecount="1" values="|//Boids is an artificial life program, developed by Craig Reynolds in 1986, which simulates the flocking behaviour of birds. &cr;&lf;//His paper on this topic was published in 1987 in the proceedings of the ACM SIGGRAPH conference. &cr;&lf;//The name refers to a &quot;bird-like object&quot;, but its pronunciation evokes that of &quot;bird&quot; in a stereotypical New York accent.&cr;&lf;//As with most artificial life simulations, Boids is an example of emergent behavior; &cr;&lf;//that is, the complexity of Boids arises from the interaction of individual agents (the boids, in this case) adhering to a set&cr;&lf;//of simple rules. The rules applied in the simplest Boids world are as follows:&cr;&lf;//&cr;&lf;//separation: steer to avoid crowding local flockmates&cr;&lf;//&cr;&lf;//alignment: steer towards the average heading of local flockmates&cr;&lf;//&cr;&lf;//cohesion: steer to move toward the average position (center of mass) of local flockmates&cr;&lf;//&cr;&lf;//More complex rules can be added, such as obstacle avoidance and goal seeking.&cr;&lf;//The movement of Boids can be characterized as either chaotic (splitting groups and wild behaviour) or orderly.&cr;&lf;//Unexpected behaviours, such as splitting flocks and reuniting after avoiding obstacles, can be considered emergent.|">
+   </PIN>
+   <PIN pinname="Output String" visible="0">
+   </PIN>
+   <PIN pinname="Show Grid" slicecount="1" values="0">
+   </PIN>
+   </NODE>
    </PATCH>

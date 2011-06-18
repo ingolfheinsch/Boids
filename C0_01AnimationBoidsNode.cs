@@ -1,46 +1,59 @@
+//Boids is an artificial life program, developed by Craig Reynolds in 1986, which simulates the flocking behaviour of birds. 
+//His paper on this topic was published in 1987 in the proceedings of the ACM SIGGRAPH conference. 
+//The name refers to a "bird-like object", but its pronunciation evokes that of "bird" in a stereotypical New York accent.
+//As with most artificial life simulations, Boids is an example of emergent behavior; 
+//that is, the complexity of Boids arises from the interaction of individual agents (the boids, in this case) adhering to a set
+//of simple rules. The rules applied in the simplest Boids world are as follows:
+//
+//separation: steer to avoid crowding local flockmates
+//
+//alignment: steer towards the average heading of local flockmates
+//
+//cohesion: steer to move toward the average position (center of mass) of local flockmates
+//
+//More complex rules can be added, such as obstacle avoidance and goal seeking.
+//The movement of Boids can be characterized as either chaotic (splitting groups and wild behaviour) or orderly.
+//Unexpected behaviours, such as splitting flocks and reuniting after avoiding obstacles, can be considered emergent.
+//
+// original code fom: Daniel Shiffman
+// ported to c#: milo
+// have fun
+//
+
+
 #region usings
 using System;
 using System.Collections;
 using System.ComponentModel.Composition;
-
 using VVVV.PluginInterfaces.V1;
 using VVVV.PluginInterfaces.V2;
 using VVVV.Utils.VColor;
 using VVVV.Utils.VMath;
-
 using VVVV.Core.Logging;
+
 #endregion usings
 
 namespace VVVV.Nodes
 {
 	#region PluginInfo
-	[PluginInfo(Name = "Boids", Category = "Animation", Version = "0.01", Help = "Basic template with one value in/out", Tags = "")]
+	[PluginInfo(Name = "Boids", Category = "Animation", Version = "0.01", Help = "Basic 2D boids behavoir", Tags = "boids, flocking")]
 	#endregion PluginInfo
 	
 
 	
 	public class C0_01AnimationBoidsNode : IPluginEvaluate
 	{
-		#region fields & pins
-		
-		Flock flock = new Flock();
-		
+		#region declaration
 		int boidCount;
-		
 		int width;
 	    int height;
-	  	
 	  	public static double cohe;
 	  	public static double align;
 	  	public static double desire;
-	  	
-	  	
-	  	[Input("XRoot", DefaultValue = 0.0)]
-		ISpread<double> FInput_XRoot;
+		Flock flock = new Flock();
+		#endregion initializing
 		
-		[Input("YRoot", DefaultValue = 0.0)]
-		ISpread<double> FInput_YRoot;
-		
+		#region fields & pins
 		[Input("Cohesion", DefaultValue = 25.0)]
 		IDiffSpread<double> FInput_Cohesion;
 		
@@ -62,9 +75,8 @@ namespace VVVV.Nodes
 		[Import()]
 		ILogger FLogger;
 		#endregion fields & pins
-		
-		 C0_01AnimationBoidsNode() {
-		 	//initializing
+		// the constructor
+		 C0_01AnimationBoidsNode() {	
 			boidCount = 350;
 			width = 2;
 			height = 2;
@@ -101,15 +113,15 @@ namespace VVVV.Nodes
 		
 		 	flock.run();
 			for (int i = 0; i < boidCount; i++){
-				FOutput_X[i] = flock.getLoc(i).x;
-				FOutput_Y[i] = flock.getLoc(i).y;
-				
+				FOutput_X[i] = Utils.VMath.VMath.Map(flock.getLoc(i).x,0,400,-1,1,0);
+				FOutput_Y[i] = Utils.VMath.VMath.Map(flock.getLoc(i).y,0,400,-1,1,0);
 			}
 		}
+		
 	}
 	
 	
-	
+	// boid object class
 	public class Boid
 	{
 		public Vector2D loc;
@@ -182,16 +194,15 @@ namespace VVVV.Nodes
 		 if (d > 0) {
       		// Normalize desired
       		desired = ~desired;
-		// Two options for desired vector magnitude (1 -- based on distance, 2 -- maxspeed)
-     	if ((slowdown) && (d < 100.0)) desired*=(maxspeed*(d/100.0)); // This damping is somewhat arbitrary
-	      else desired*=maxspeed;
-	      // Steering = Desired minus Velocity
-	      steer = desired-vel;
-	      steer =limit(steer, maxforce);  // Limit to maximum steering force
-	      
+			// Two options for desired vector magnitude (1 -- based on distance, 2 -- maxspeed)
+     		if ((slowdown) && (d < 100.0)) desired*=(maxspeed*(d/100.0)); // This damping is somewhat arbitrary
+	     	else desired*=maxspeed;
+	      	// Steering = Desired minus Velocity
+	      	steer = desired-vel;
+	     	steer =limit(steer, maxforce);  // Limit to maximum steering force
 	    } 
 	    else {
-	      steer = new Vector2D(0,0);
+	      	steer = new Vector2D(0,0);
     	}
 		return steer;
 		}
@@ -205,7 +216,7 @@ namespace VVVV.Nodes
 			
 		}
 		
-		  // Separation
+		// Separation
   		// Method checks for nearby boids and steers away
   		Vector2D seperate (ArrayList boids) {
     	float desiredseparation = (float) C0_01AnimationBoidsNode.desire;
@@ -224,7 +235,7 @@ namespace VVVV.Nodes
         	diff = ~diff;
         	diff/=d;        // Weight by distance
         	steer+=diff;
-        	count++;            // Keep track of how many
+        	count++;       // Keep track of how many
       }
     }
     // Average -- divide by how many
@@ -239,13 +250,12 @@ namespace VVVV.Nodes
       steer*=maxspeed;
       steer-=vel;
       steer = limit(steer,maxforce);
-      
     }
     return steer;
   }
   
   
-    // Alignment
+   // Alignment
   // For every nearby boid in the system, calculate the average velocity
   Vector2D align (ArrayList boids) {
     float neighbordist = (float) C0_01AnimationBoidsNode.align;
@@ -305,45 +315,39 @@ namespace VVVV.Nodes
   }
   
    public float dist(Vector2D v0, Vector2D v1) {
- 	 double dx = v0.x - v1.x;
+ 	double dx = v0.x - v1.x;
     double dy = v0.y - v1.y;
     //float dz = v1.z - v2.z;
     return (float) Math.Sqrt(dx*dx + dy*dy );
-
   }
-
-		
-
-
 	}
 	
+	// flock swarm class
 	public class Flock
 	{
-	ArrayList boids;
+		ArrayList boids;
 	
-	public Flock() {
-	boids = new ArrayList();
-	}
+		public Flock() {
+			boids = new ArrayList();
+		}
 	
-	public void run() {
-    for (int i = 0; i < boids.Count; i++) {
-      Boid b = (Boid) boids[i];  
-      b.run(boids);  // Passing the entire list of boids to each boid individually
-    }
-  }
-  public Vector2D getLoc(int index) {
- 	Boid b = (Boid) boids[index];
- 	return b.loc;
-  }
+		public void run() {
+    		for (int i = 0; i < boids.Count; i++) {
+     		Boid b = (Boid) boids[i];  
+      		b.run(boids);  // Passing the entire list of boids to each boid individually
+    	}
+  	}
+  	public Vector2D getLoc(int index) {
+ 		Boid b = (Boid) boids[index];
+ 		return b.loc;
+  	}
   
-   public void addBoid(Boid b) {
-    boids.Add(b);
-  }
-  public void clearBoid() {
-    boids.Clear();
-  }
-
-	
+   	public void addBoid(Boid b) {
+    	boids.Add(b);
+  	}
+		
+  	public void clearBoid() {
+    	boids.Clear();
+  	}
 	}
-	
 }
