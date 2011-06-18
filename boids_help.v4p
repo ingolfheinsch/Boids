@@ -13,13 +13,15 @@
    </PIN>
    <PIN pinname="Coh">
    </PIN>
-   <PIN pinname="Align" visible="1" slicecount="1" values="10">
+   <PIN pinname="Align" slicecount="1" visible="1" values="10">
    </PIN>
-   <PIN pinname="Desire" visible="1" slicecount="1" values="91.5">
+   <PIN pinname="Desire" slicecount="1" visible="1" values="91.5">
    </PIN>
-   <PIN pinname="Cohesion" visible="1" slicecount="1" values="100">
+   <PIN pinname="Cohesion" slicecount="1" visible="1" values="100">
    </PIN>
    <PIN pinname="XRoot" slicecount="1" values="4.48">
+   </PIN>
+   <PIN pinname="Count" slicecount="1" values="150">
    </PIN>
    </NODE>
    <NODE componentmode="Hidden" id="4" nodename="Map (Value)" systemname="Map (Value)">
@@ -63,7 +65,7 @@
    </BOUNDS>
    <PIN pinname="Layers" visible="1">
    </PIN>
-   <PIN pinname="Background Color" visible="1" slicecount="1" values="|0.26000,0.26000,0.26000,1.00000|">
+   <PIN pinname="Background Color" slicecount="1" visible="1" values="|0.26000,0.26000,0.26000,1.00000|">
    </PIN>
    <PIN pinname="Windowed Antialiasing Quality Level" slicecount="1" values="1">
    </PIN>
@@ -111,7 +113,7 @@
    </PIN>
    <PIN pinname="Transform" visible="1">
    </PIN>
-   <PIN pinname="Color" visible="1" slicecount="1" values="|0.78000,0.78000,0.78000,1.00000|">
+   <PIN pinname="Color" slicecount="1" visible="1" values="|0.78000,0.78000,0.78000,1.00000|">
    </PIN>
    </NODE>
    <LINK dstnodeid="11" dstpinname="Transform" srcnodeid="8" srcpinname="Transform Out">
@@ -143,7 +145,7 @@
    </PIN>
    <PIN pinname="Layer" visible="1">
    </PIN>
-   <PIN pinname="Layer 2" visible="1" slicecount="1" values="||">
+   <PIN pinname="Layer 2" slicecount="1" visible="1" values="||">
    </PIN>
    </NODE>
    <LINK dstnodeid="6" dstpinname="Layers" srcnodeid="15" srcpinname="Layer">

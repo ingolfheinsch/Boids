@@ -49,6 +49,9 @@ namespace VVVV.Nodes
 		
 		[Input("Desire", DefaultValue = 12.0)]
 		ISpread<double> FInput_Desire;
+		
+		[Input("Count", DefaultValue = 100)]
+		IDiffSpread<int> FInput_BCount;
 
 		[Output("Output_X")]
 		ISpread<double> FOutput_X;
@@ -83,7 +86,14 @@ namespace VVVV.Nodes
 		align = FInput_Align[0];
 		desire = FInput_Desire[0];
 		
-		
+		if(FInput_BCount.IsChanged) 
+		{
+			boidCount = FInput_BCount[0];
+			flock.clearBoid();
+			for (int i = 0; i < boidCount; i++) {
+    		flock.addBoid(new Boid(new Vector2D(0,0), 1.2f, 0.04f));
+  		}
+		}
 		
 		 flock.run();
 			FOutput_X.SliceCount = boidCount;
@@ -93,7 +103,7 @@ namespace VVVV.Nodes
 				FOutput_X[i] = flock.getLoc(i).x;
 				FOutput_Y[i] = flock.getLoc(i).y;
 				
-				}
+		}
 			//FLogger.Log(LogType.Debug, "Logging to Renderer (TTY)");
 		}
 	}
@@ -194,14 +204,6 @@ namespace VVVV.Nodes
    		 if (loc.y > 400+r) loc.y = -r;
 		}
 		
-		/*
-		void borders() {
-		if (loc.x < 0) vel.x *=-1;
-    	if (loc.y < 0) vel.y *=-1;
-   	 	if (loc.x > 400) vel.x *=-1;
-   		 if (loc.y > 400) vel.y *=-1;
-		}
-		*/
 		  // Separation
   // Method checks for nearby boids and steers away
   	Vector2D seperate (ArrayList boids) {
@@ -334,7 +336,9 @@ namespace VVVV.Nodes
    public void addBoid(Boid b) {
     boids.Add(b);
   }
-
+  public void clearBoid() {
+    boids.Clear();
+  }
 
 	
 	}
