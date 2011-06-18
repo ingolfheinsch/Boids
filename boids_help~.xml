@@ -3,7 +3,7 @@
    <BOUNDS height="11250" left="0" top="1215" type="Window" width="9210">
    </BOUNDS>
    <NODE componentmode="Hidden" filename="0.01AnimationBoids.csproj" id="1" nodename="Boids (Animation 0.01)" systemname="Boids (Animation 0.01)">
-   <BOUNDS height="270" left="1200" top="3945" type="Node" width="1020">
+   <BOUNDS height="270" left="1200" top="4365" type="Node" width="1020">
    </BOUNDS>
    <PIN pinname="Input" slicecount="1" values="1.01">
    </PIN>
@@ -21,7 +21,7 @@
    </PIN>
    <PIN pinname="XRoot" slicecount="1" values="100">
    </PIN>
-   <PIN pinname="Count" slicecount="1" values="145">
+   <PIN pinname="Count" visible="1">
    </PIN>
    <PIN pinname="YRoot" slicecount="1" values="100">
    </PIN>
@@ -137,15 +137,15 @@
    <LINK srcnodeid="1" srcpinname="Output_Y" dstnodeid="8" dstpinname="TranslateY">
    </LINK>
    <LINK srcnodeid="1" srcpinname="Output_Y" dstnodeid="12" dstpinname="Y" linkstyle="Bezier">
-   <LINKPOINT x="2220" y="5190">
+   <LINKPOINT x="2220" y="5470">
    </LINKPOINT>
-   <LINKPOINT x="4965" y="5190">
+   <LINKPOINT x="4965" y="5330">
    </LINKPOINT>
    </LINK>
    <LINK srcnodeid="1" srcpinname="Output_X" dstnodeid="12" dstpinname="X" linkstyle="Bezier">
-   <LINKPOINT x="1260" y="5190">
+   <LINKPOINT x="1260" y="5470">
    </LINKPOINT>
-   <LINKPOINT x="4320" y="5190">
+   <LINKPOINT x="4320" y="5330">
    </LINKPOINT>
    </LINK>
    <LINK srcnodeid="11" srcpinname="Layer" dstnodeid="6" dstpinname="Layers">
@@ -170,4 +170,18 @@
    <PIN pinname="Show Grid" slicecount="1" values="0">
    </PIN>
    </NODE>
+   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="24">
+   <BOUNDS type="Node" left="1440" top="3750" width="100" height="100">
+   </BOUNDS>
+   <BOUNDS type="Box" left="1440" top="3750" width="795" height="240">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" values="100">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Count">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="24" srcpinname="Y Output Value" dstnodeid="1" dstpinname="Count">
+   </LINK>
    </PATCH>
