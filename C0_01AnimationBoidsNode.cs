@@ -42,13 +42,13 @@ namespace VVVV.Nodes
 		ISpread<double> FInput_YRoot;
 		
 		[Input("Cohesion", DefaultValue = 25.0)]
-		ISpread<double> FInput_Cohesion;
+		IDiffSpread<double> FInput_Cohesion;
 		
 		[Input("Align", DefaultValue = 25.0)]
-		ISpread<double> FInput_Align;
+		IDiffSpread<double> FInput_Align;
 		
 		[Input("Desire", DefaultValue = 12.0)]
-		ISpread<double> FInput_Desire;
+		IDiffSpread<double> FInput_Desire;
 		
 		[Input("Count", DefaultValue = 100)]
 		IDiffSpread<int> FInput_BCount;
@@ -64,47 +64,47 @@ namespace VVVV.Nodes
 		#endregion fields & pins
 		
 		 C0_01AnimationBoidsNode() {
-		 
-		 boidCount = 350;
-		 width = 2;
-		 height = 2;
-		
-		
-		
-		for (int i = 0; i < boidCount; i++) {
-    		flock.addBoid(new Boid(new Vector2D(0,0), 1.2f, 0.04f));
-  		}
-  		
-
+		 	//initializing
+			boidCount = 350;
+			width = 2;
+			height = 2;
+			for (int i = 0; i < boidCount; i++) {
+	    		flock.addBoid(new Boid(new Vector2D(0,0), 1.2f, 0.04f));
+	  		}
 		}
-		
+
 		//called when data for any output pin is requested
 		public void Evaluate(int SpreadMax)
 		{
+			if(FInput_Cohesion.IsChanged){
+				cohe = FInput_Cohesion[0];
+			}
+			
+			if(FInput_Align.IsChanged){
+				align = FInput_Align[0];
+			}
+			
+			if(FInput_Desire.IsChanged){
+				desire = FInput_Desire[0];
+			}
 		
-		cohe = FInput_Cohesion[0];
-		align = FInput_Align[0];
-		desire = FInput_Desire[0];
+			if(FInput_BCount.IsChanged) 
+			{
+				boidCount = FInput_BCount[0];
+				flock.clearBoid();
+				for (int i = 0; i < boidCount; i++) {
+	    		flock.addBoid(new Boid(new Vector2D(0,0), 1.2f, 0.04f));	
+	  			}
+				FOutput_X.SliceCount = boidCount;
+				FOutput_Y.SliceCount = boidCount;
+			}
 		
-		if(FInput_BCount.IsChanged) 
-		{
-			boidCount = FInput_BCount[0];
-			flock.clearBoid();
-			for (int i = 0; i < boidCount; i++) {
-    		flock.addBoid(new Boid(new Vector2D(0,0), 1.2f, 0.04f));
-  		}
-		}
-		
-		 flock.run();
-			FOutput_X.SliceCount = boidCount;
-			FOutput_Y.SliceCount = boidCount;
-
+		 	flock.run();
 			for (int i = 0; i < boidCount; i++){
 				FOutput_X[i] = flock.getLoc(i).x;
 				FOutput_Y[i] = flock.getLoc(i).y;
 				
-		}
-			//FLogger.Log(LogType.Debug, "Logging to Renderer (TTY)");
+			}
 		}
 	}
 	
@@ -196,32 +196,35 @@ namespace VVVV.Nodes
 		return steer;
 		}
 		
-		
 		void borders() {
-		if (loc.x < -r) loc.x = 400+r;
-    	if (loc.y < -r) loc.y = 400+r;
-   	 	if (loc.x > 400+r) loc.x = -r;
-   		 if (loc.y > 400+r) loc.y = -r;
+			
+			if (loc.x < -r) loc.x = 400+r;
+	    	if (loc.y < -r) loc.y = 400+r;
+	   	 	if (loc.x > 400+r) loc.x = -r;
+	   		if (loc.y > 400+r) loc.y = -r;
+			
 		}
 		
 		  // Separation
-  // Method checks for nearby boids and steers away
-  	Vector2D seperate (ArrayList boids) {
+  		// Method checks for nearby boids and steers away
+  		Vector2D seperate (ArrayList boids) {
     	float desiredseparation = (float) C0_01AnimationBoidsNode.desire;
     	Vector2D steer = new Vector2D(0,0);
-    int count = 0;
-    // For every boid in the system, check if it's too close
-    for (int i = 0 ; i < boids.Count; i++) {
-      Boid other = (Boid) boids[i];
-      float d = dist(loc,other.loc);
-      // If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
-      if ((d > 0) && (d < desiredseparation)) {
-        // Calculate vector pointing away from neighbor
-        Vector2D diff = loc-other.loc;
-        diff = ~diff;
-        diff/=d;        // Weight by distance
-        steer+=diff;
-        count++;            // Keep track of how many
+    	int count = 0;
+  			
+  		
+   		 // For every boid in the system, check if it's too close
+    	for (int i = 0 ; i < boids.Count; i++) {
+      		Boid other = (Boid) boids[i];
+      		float d = dist(loc,other.loc);
+      		// If the distance is greater than 0 and less than an arbitrary amount (0 when you are yourself)
+      		if ((d > 0) && (d < desiredseparation)) {
+        	// Calculate vector pointing away from neighbor
+       		Vector2D diff = loc-other.loc;
+        	diff = ~diff;
+        	diff/=d;        // Weight by distance
+        	steer+=diff;
+        	count++;            // Keep track of how many
       }
     }
     // Average -- divide by how many

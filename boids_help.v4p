@@ -13,15 +13,17 @@
    </PIN>
    <PIN pinname="Coh">
    </PIN>
-   <PIN pinname="Align" slicecount="1" visible="1" values="10">
+   <PIN pinname="Align" slicecount="1" visible="1" values="100">
    </PIN>
-   <PIN pinname="Desire" slicecount="1" visible="1" values="91.5">
+   <PIN pinname="Desire" slicecount="1" visible="1" values="60">
    </PIN>
-   <PIN pinname="Cohesion" slicecount="1" visible="1" values="100">
+   <PIN pinname="Cohesion" slicecount="1" visible="1" values="200">
    </PIN>
-   <PIN pinname="XRoot" slicecount="1" values="4.48">
+   <PIN pinname="XRoot" slicecount="1" values="100">
    </PIN>
-   <PIN pinname="Count" slicecount="1" values="150">
+   <PIN pinname="Count" slicecount="1" values="145">
+   </PIN>
+   <PIN pinname="YRoot" slicecount="1" values="100">
    </PIN>
    </NODE>
    <NODE componentmode="Hidden" id="4" nodename="Map (Value)" systemname="Map (Value)">
@@ -38,8 +40,6 @@
    <PIN pinname="Mapping" slicecount="1" values="Float">
    </PIN>
    </NODE>
-   <LINK dstnodeid="4" dstpinname="Input" srcnodeid="1" srcpinname="Output_X">
-   </LINK>
    <NODE componentmode="Hidden" id="5" nodename="Map (Value)" systemname="Map (Value)">
    <BOUNDS height="100" left="885" top="2175" type="Node" width="100">
    </BOUNDS>
@@ -54,8 +54,6 @@
    <PIN pinname="Mapping" slicecount="1" values="Float">
    </PIN>
    </NODE>
-   <LINK dstnodeid="5" dstpinname="Input" srcnodeid="1" srcpinname="Output_Y">
-   </LINK>
    <NODE componentmode="InAWindow" id="6" nodename="Renderer (EX9)" systemname="Renderer (EX9)">
    <BOUNDS height="100" left="1005" top="7905" type="Node" width="100">
    </BOUNDS>
@@ -101,7 +99,7 @@
    </BOUNDS>
    <PIN pinname="Y Output Value" visible="1">
    </PIN>
-   <PIN pinname="Y Input Value" slicecount="1" values="0.02">
+   <PIN pinname="Y Input Value" slicecount="1" values="0.03">
    </PIN>
    </NODE>
    <NODE componentmode="Hidden" filename="" id="11" nodename="Segment (EX9.Geometry 2d)" systemname="Segment (DX9)">
@@ -189,5 +187,9 @@
    <LINK dstnodeid="15" dstpinname="Layer 1" srcnodeid="11" srcpinname="Layer">
    <LINKPOINT x="0" y="5835">
    </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="1" srcpinname="Output_X" dstnodeid="4" dstpinname="Input">
+   </LINK>
+   <LINK srcnodeid="1" srcpinname="Output_Y" dstnodeid="5" dstpinname="Input">
    </LINK>
    </PATCH>
